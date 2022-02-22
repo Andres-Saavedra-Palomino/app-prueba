@@ -1,0 +1,75 @@
+<div class="card mb-3">
+  <form class="col-12" [formGroup]="grupo">
+    <div class="card-body">
+      <h5 class="card-title">Servicio</h5>
+      <div class="form-group">
+        <label>Nombre</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="titulo"
+          required
+        />
+        <span
+          class="text-danger"
+          *ngIf="
+            this.grupo.get('titulo')?.hasError('required') &&
+            this.grupo.get('titulo')?.touched
+          "
+          >campo requerido</span
+        >
+      </div>
+      <div class="form-group">
+        <label>Descripción</label>
+        <input
+          type="text"
+          placeholder="Descripción"
+          class="form-control"
+          formControlName="descripcion"
+          required
+        />
+        <span
+          class="text-danger"
+          *ngIf="
+            this.grupo.get('descripcion')?.invalid &&
+            this.grupo.get('descripcion')?.touched
+          "
+          >campo requerido</span
+        >
+      </div>
+      <div class="form-group">
+        <label>Categorías</label>
+        <select
+          multiple
+          class="form-control"
+          formControlName="categorias"
+          required
+        >
+          <option value="autos">Autos</option>
+          <option value="salud">Salud</option>
+          <option value="hogar">Hogar</option>
+        </select>
+        <span
+          class="text-danger"
+          *ngIf="
+            grupo.get('categorias')?.invalid &&
+            this.grupo.get('categorias')?.touched
+          "
+          >campo requerido</span
+        >
+      </div>
+    </div>
+    <div class="card-footer">
+      <button
+        class="btn btn-primary"
+        [disabled]="!grupo.valid || grabando"
+        (click)="grabar()"
+      >
+        Grabar
+      </button>
+      <button class="btn btn-danger" type="button" (click)="cancelar()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>
